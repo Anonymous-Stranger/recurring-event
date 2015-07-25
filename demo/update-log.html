@@ -1,0 +1,37 @@
+
+<link rel='import' href='../../polymer/polymer.html'/>
+
+<dom-module id='update-log'>
+
+	<template>
+		
+		<template is='dom-repeat' items='{{messages}}'>
+			<div>{{item}}</div>
+		</template>
+
+	</template>
+
+	<script>
+
+		Polymer({
+
+			is: "update-log",
+
+			properties: {
+				messages: {
+					type: Array,
+					value: function() { return []; },
+					readonly: true,
+					notify: true
+				}
+			},
+
+			update: function() {
+				this.unshift("messages", "Updated as of "+(new Date()).toLocaleString());
+			}
+
+		});
+
+	</script>
+
+</dom-module>

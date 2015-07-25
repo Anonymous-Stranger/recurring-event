@@ -1,0 +1,212 @@
+
+<link rel='import' href='../../polymer/polymer.html'/>
+
+<link rel='import' href="../recurring-event.html"/>
+
+<link rel='import' href="update-log.html"/>
+
+<dom-module id='recurring-event-demo'>
+
+	<style>
+
+		:host {
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+
+			background-color: #CDCDCD;
+
+			overflow: auto;
+
+			font-family: sans-serif;
+		}
+
+		.demo-item {
+			width: 300px;
+			height: 300px;
+
+			margin: 25px;
+
+			display: inline-flex;
+			flex-direction: column;
+
+			overflow: hidden;
+
+			background-color: #EDEDED;
+		}
+
+		.demo-item .title,
+		.demo-item .console,
+		.demo-item .action-panel {
+			width: 100%;
+
+			margin: 0;
+			padding: 4px;
+			box-sizing: border-box;
+
+			flex-shrink: 0;
+
+			border: 1px solid grey;
+		}
+
+		.demo-item .console {
+			overflow: auto;
+		}
+
+		.demo-item .action-panel {
+			padding-top: 0;
+			padding-bottom: 0;
+
+			display: flex;
+			justify-content: space-around;
+		}
+
+		.demo-item .action-panel > *{
+			margin-top: 2px;
+			margin-bottom: 2px;
+		}
+
+		.demo-item .console {
+			flex-grow: 1;
+			flex-shrink: 1;
+		}
+
+	</style>
+
+	<template>
+		
+		<!-- 5s Fire -->
+
+		<div class='demo-item'>
+
+			<h1 class='title'>5s Fire</h1>
+
+			<update-log id='logA' class='console'></update-log>
+
+			<recurring-event event='update-demo-A' fire-rate='5000'></recurring-event>
+
+		</div>
+
+
+		<!-- 8s Fire -->
+
+		<div class='demo-item'>
+
+			<h1 class='title'>8s Fire</h1>
+
+			<update-log id='logB' class='console'></update-log>
+
+			<recurring-event event='update-demo-B' fire-rate='8000'></recurring-event>
+
+		</div>
+
+
+		<!-- Pausing -->
+
+		<div class='demo-item'>
+			
+			<h1 class='title'>Pausing</h1>
+
+			<update-log id='logC' class='console'></update-log>
+
+			<div class='action-panel'>
+				<span>
+					<input id='pauseC' type='checkbox' checked="{{pauseC::change}}"/>
+					<label for='pauseC'>Pause</label>
+				</span>
+			</div>
+
+			<recurring-event event='update-demo-C' fire-rate='5000' paused="{{pauseC}}"></recurring-event>
+
+		</div>
+
+
+		<!-- Forced Firing -->
+
+		<div class='demo-item'>
+
+			<h1 class='title'>Forced Firing</h1>
+
+			<update-log id='logD' class='console'></update-log>
+
+			<div class='action-panel'>
+				<button on-tap='forceD'>Force Fire</button>
+			</div>
+
+			<recurring-event id='recEvD' event='update-demo-D' fire-rate='5000'></recurring-event>
+
+		</div>
+
+
+		<!-- Pausing + Forced Firing -->
+
+		<div class='demo-item'>
+
+			<h1 class='title'>Pausing + Forced Firing</h1>
+
+			<update-log id='logE' class='console'></update-log>
+
+			<div class='action-panel'>
+				<span>
+					<input id='pauseE' type='checkbox' checked="{{pauseE::change}}"/>
+					<label for='pauseE'>Pause</label>
+				</span>
+				<button on-tap='forceE'>Force Fire</button>
+			</div>
+
+			<recurring-event id='recEvE' event='update-demo-E' fire-rate='5000' paused='{{pauseE}}'></recurring-event>
+
+		</div>
+
+	</template>
+
+	<script>
+
+		Polymer({
+
+			is: "recurring-event-demo",
+
+			listeners: {
+				'update-demo-A': 'updateDemoA',
+				'update-demo-B': 'updateDemoB',
+				'update-demo-C': 'updateDemoC',
+				'update-demo-D': 'updateDemoD',
+				'update-demo-E': 'updateDemoE'
+			},
+
+			updateDemoA: function() {
+				this.$.logA.update();
+			},
+
+			updateDemoB: function() {
+				this.$.logB.update();
+			},
+
+			updateDemoC: function() {
+				this.$.logC.update();
+			},
+
+			updateDemoD: function() {
+				this.$.logD.update();
+			},
+
+			updateDemoE: function() {
+				this.$.logE.update();
+			},
+
+			forceD: function() {
+				this.$.recEvD.forceFire();
+			},
+
+			forceE: function() {
+				this.$.recEvE.forceFire();
+			}
+
+		});
+
+	</script>
+	
+
+</dom-module>

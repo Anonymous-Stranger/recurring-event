@@ -1,0 +1,27 @@
+{
+  "name": "recurring-event",
+  "version": "0.0.1",
+  "authors": [
+    "Akash Gaonkar <akashgaonkar@gmail.com>"
+  ],
+  "description": "A polymer webcomponent to fire an event every so often, with support for pausing, forced fires, and debouncing fires.",
+  "main": "recurring-event.html",
+  "keywords": [
+    "web-components",
+    "polymer",
+    "recurring",
+    "event"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "../",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#~1.0.8"
+  }
+}
